@@ -5,6 +5,8 @@ from datetime import datetime, timedelta
 from typing import List
 import secrets
 from bson import ObjectId
+import os
+import uvicorn
 
 from database import get_user_collection, get_note_collection, get_shared_link_collection
 from models import UserCreate, UserLogin, NoteCreate, NoteUpdate, ShareRequest, Token
@@ -244,5 +246,5 @@ async def get_shared_note(token: str):
     return note
 
 if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run("main:app", host="0.0.0.0", port=port, reload=False)
