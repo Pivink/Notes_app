@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: notes-app-backend
+    env: docker
+    dockerfilePath: ./server/Dockerfile
+    envVars:
+      - key: MONGO_DB_URL
+        fromSecret: MONGO_DB_URL
+      - key: JWT_SECRET
+        fromSecret: JWT_SECRET
+      - key: JWT_ALGORITHM
+        value: HS256
+    plan: free
+    numInstances: 1
